@@ -76,11 +76,14 @@
     renderMessages(items) {
       const messages = this.el.querySelector('#jsMessages');
       messages.innerHTML = '';
+      const ul = document.createElement('div');
 
       items.forEach((item) => {
         const message = this.createMessage(item, item.email === this.data.email);
-        messages.appendChild(message);
+        ul.appendChild(message);
       });
+
+      messages.appendChild(ul);
       messages.scrollTop = messages.scrollHeight;
     }
 
