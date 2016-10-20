@@ -1,119 +1,82 @@
 (function () {
-  // import
-  const Button = window.Button;
+	'use strict';
 
-  class Form {
+	// import
+	const Block = window.Block;
+	const Button = window.Button;
 
-    /**
-     * Конструктор класса Form
-    */
-    constructor(options = { data: {}, attrs: {} }) {
-      this.data = options.data;
-      this.attrs = options.attrs;
-      this.el = options.el;
+	class Form extends Block {
 
-      this.render();
-    }
+		/**
+		 * Конструктор класса Form
+		 */
+		constructor(options = {data: {}}) {
+			super('form');
+			this.template = window.fest['form/form.tmpl'];
+			this.data = options.data;
+			this._el = options.el;
+			this.render();
+		}
 
-    render() {
-      this._updateHtml();
-      this._installControls();
-    }
+		/**
+		 * Обновляем HTML
+		 */
+		render() {
+			this._updateHtml();
+			this._installControls();
+		}
 
-    /**
-     * Вернуть поля формы
-     * @return {string}
-     */
-    _getFields() {
-      const { fields = [] } = this.data;
+		/**
+		 * Обнуляем форму
+		 */
+		reset() {
+			this._el.querySelector('form').reset();
+		}
 
-      return fields.map(field =>
-        `<input type="${field.type}" name="${field.name}" placeholder="${field.label}">`
-      ).join(' ');
-    }
+		/**
+		 * Обновить html компонента
+		 */
+		_updateHtml() {
+			this._el.innerHTML = this.template(this.data);
+		}
 
-    /**
-     * Получить атрибуты компонента
-     */
-    setAttrs(attrs = {}) {
-      Object.keys(attrs).forEach(key => this.el.setAttribute(key, attrs[key]));
-    }
+		/**
+		 * Вставить управляющие элементы в форму
+		 */
+		_installControls() {
+			let {controls = []} = this.data;
 
-    /**
-     * Обновить html компонента
-     */
-    _updateHtml() {
-      this.el.innerHTML = `
-        <form method="POST">
-          <h1>${this.data.title}</h1>
-          <div>
-            ${this._getFields()}
-          </div>
-          <div class="js-controls">
-          </div>
-        <form>
-      `;
-      this.setAttrs(this.attrs);
-    }
+			controls.forEach(data => {
+				let control = new Button({text: data.text});
+				this._el.querySelector('.js-controls').appendChild(control._get());
+			});
+		}
 
-    /**
-     * Вставить управляющие элементы в форму
-     */
-    _installControls() {
-      const { controls = [] } = this.data;
+		/**
+		 * Взять данные формы
+		 * @return {object}
+		 */
+		getFormData() {
+			let form = this._el.querySelector('form');
+			let elements = form.elements;
+			let fields = {};
 
-      controls.forEach((data) => {
-        const control = new Button({ text: data.text }).render();
-        this.el.querySelector('.js-controls').appendChild(control.el);
-      });
-    }
+			Object.keys(elements).forEach(element => {
+				let name = elements[element].name;
+				let value = elements[element].value;
 
-    /**
-     * Подписка на событие
-     * @param {string} type - имя события
-     * @param {function} callback - коллбек
-     */
-    on(type, callback) {
-      this.el.addEventListener(type, callback);
-    }
+				if (!name) {
+					return;
+				}
 
-    /**
-     * Взять данные формы
-     * @return {object}
-     */
-    getFormData() {
-      const form = this.el.querySelector('form');
-      const elements = form.elements;
-      const fields = {};
+				fields[name] = value;
+			});
 
-      Object.keys(elements).forEach((element) => {
-        const name = elements[element].name;
-        const value = elements[element].value;
+			return fields;
+		}
 
-        if (!name) {
-          return;
-        }
+	}
 
-        fields[name] = value;
-      });
-
-      return fields;
-    }
-
-    validate() {
-      const fields = this.getFormData();
-      let isValid = true;
-
-      Object.keys(fields).forEach((value) => {
-        if (fields[value] === '') {
-          alert(`Field ${value} must not be empty`);
-          isValid = false;
-        }
-      });
-      return isValid;
-    }
-  }
-
-  // export
-  window.Form = Form;
+	//export
+	window.Form = Form;
 })();

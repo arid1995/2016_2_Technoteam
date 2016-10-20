@@ -1,141 +1,16 @@
 (function () {
-  if (typeof window === 'object') {
-    // import
-    const Chat = window.Chat;
-    const Form = window.Form;
-    const Button = window.Button;
+	'use strict';
 
-    const loginPage = document.querySelector('.js-login');
-    const registerPage = document.querySelector('.js-register');
-    const chatPage = document.querySelector('.js-chat');
-    const registerButton = document.querySelector('.js-reg-button');
-
-    const regButton = new Button({
-      text: 'Sign up',
-    });
-
-    regButton.on('click', (event) => {
-      event.preventDefault();
-
-      loginPage.hidden = true;
-      chatPage.hidden = true;
-      registerPage.hidden = false;
-      registerButton.hidden = true;
-    });
-
-    const loginForm = new Form({
-      el: document.createElement('div'),
-      data: {
-        title: 'Login',
-        fields: [
-          {
-            label: 'Login',
-            name: 'login',
-            type: 'text',
-          },
-          {
-            label: 'password',
-            name: 'password',
-            type: 'password',
-          },
-        ],
-        controls: [
-          {
-            text: 'Войти',
-            attrs: {
-              type: 'submit',
-            },
-          },
-        ],
-      },
-    });
-
-    const registerForm = new Form({
-      el: document.createElement('div'),
-      data: {
-        title: 'Sign up',
-        fields: [
-          {
-            label: 'Login',
-            name: 'login',
-            type: 'text',
-          },
-          {
-            label: 'email',
-            name: 'email',
-            type: 'email',
-          },
-          {
-            label: 'Password',
-            name: 'password',
-            type: 'password',
-          },
-          {
-            label: 'Confirm password',
-            name: 'confirm_password',
-            type: 'password',
-          },
-        ],
-        controls: [
-          {
-            text: 'Sign up',
-            attrs: {
-              type: 'submit',
-            },
-          },
-        ],
-      },
-    });
-
-    const chat = new Chat({
-      el: document.createElement('div'),
-    });
-
-    loginForm.on('submit', (event) => {
-      event.preventDefault();
-
-      if (!loginForm.validate()) return;
-
-      const formData = loginForm.getFormData();
-      const response = request('http://the-backend.herokuapp.com/api/session', formData, 'POST');
-      if (response === null) return;
-
-      const responseObj = JSON.parse(response);
-
-      alert(responseObj.toString());
-      chat.set({
-        username: formData.login,
-        email: formData.login,
-      }).render();
-
-      chat.subscribe();
-
-      loginPage.hidden = true;
-      regButton.hidden = true;
-      registerPage.hidden = true;
-      chatPage.hidden = false;
-    });
-
-    registerForm.on('submit', (event) => {
-      event.preventDefault();
-      if (!registerForm.validate()) return;
-
-      const formData = registerForm.getFormData();
-      const response = request('http://the-backend.herokuapp.com/api/user', formData, 'POST');
-      if (response === null) return;
-
-      loginPage.hidden = false;
-      chatPage.hidden = true;
-      registerPage.hidden = true;
-      registerButton.hidden = false;
-    });
+	const Router = window.Router;
+	const ChatView = window.ChatView;
+	const MainView = window.MainView;
 
 
-    loginPage.appendChild(loginForm.el);
-    chatPage.appendChild(chat.el);
-    registerPage.appendChild(registerForm.el);
-    registerButton.appendChild(regButton.el);
+	// TIP: роуты нужно указывать от наиболее специфичного к наименее специфичному
+	// З.Ы. чтобы более ранние роуты не были префиксами более поздних ;]
+	(new Router)
+		.addRoute('/chat', ChatView)
+		.addRoute('/', MainView)
+		.start();
 
-    loginPage.hidden = false;
-  }
 })();
