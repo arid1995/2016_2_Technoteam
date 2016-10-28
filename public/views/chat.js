@@ -21,7 +21,6 @@
 					email: options.email
 				}
 			});
-			this._component.render();
 			this._component.subscribe();
 
 			this.show();

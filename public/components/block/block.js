@@ -51,6 +51,10 @@
 		_get() {
 			return this._el;
 		}
+
+    setRouter(router) {
+      this.router = router;
+    }
 	}
 
 	//   export

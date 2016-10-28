@@ -9,9 +9,6 @@
 
 	class Chat extends Block {
 
-		/**
-		 * Конструктор класса Chat
-		 */
 		constructor({data = {messages: [], username: '', email: ''}, el}) {
 			super('form');
 			this.template = window.fest['chat/chat.tmpl'];
@@ -22,9 +19,6 @@
 			this.render();
 		}
 
-		/**
-		 * Инициализация составных компонент
-		 */
 		init() {
 			this._updateHtml();
 			this.form = new Form({
@@ -51,34 +45,20 @@
 
 		}
 
-		/**
-		 * Обновление внешнего вида
-		 */
 		render() {
 			this._renderMessages();
 			this._renderForm();
 		}
 
-		/**
-		 * Обновить данные компонента
-		 * @param {Object} data - данные компонента
-		 * @returns {Chat}
-		 */
 		set(data) {
 			this.data = Object.assign({}, this.data, data);
 			return this.render();
 		}
 
-		/**
-		 * Подписываем чат на сетевые и пользовательские события
-		 */
 		subscribe() {
 			technolibs.onMessage(this._updateMessages.bind(this));
 		}
 
-		/**
-		 * Обрабатываем отправку сообщения из чата
-		 */
 		_sendMessage(event) {
 			event.preventDefault();
 
@@ -86,30 +66,20 @@
 				message: this.form.getFormData().message,
 				email: this.data.email
 			};
-			
+
 			let message = new Message(data);
-			
+
 			message.save()
 				.then(data => {
 					this.form.reset();
 				});
-
-			// let result = technolibs.request('/api/messages', data);
-			
 		}
 
-		/**
-		 * Обновляем HTML элемента
-		 */
 		_updateHtml() {
 			this.data.username = this.data.username || this.data.user || 'Anon';
 			this._el.innerHTML = this.template(this.data);
 		}
 
-		/**
-		 * Обновляем список сообщений
-		 * @return {[type]} [description]
-		 */
 		_renderMessages() {
 			let wrapper = this._el.querySelector('.js-messages');
 			console.log(this.data);
@@ -122,17 +92,10 @@
 			wrapper.scrollTop = wrapper.scrollHeight;
 		}
 
-		/**
-		 * Обновляем форму
-		 */
 		_renderForm() {
 			this.form.render();
 		}
 
-		/**
-		 * Обновляем список сообщений
-		 * @param {Object} data
-		 */
 		_updateMessages(data) {
 			let messages = Object.keys(data).map(key => {
 				let entry = data[key];
@@ -148,6 +111,5 @@
 		}
 	}
 
-	//export
 	window.Chat = Chat;
 })();

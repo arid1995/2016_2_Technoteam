@@ -26,23 +26,14 @@
 			this._installControls();
 		}
 
-		/**
-		 * Обнуляем форму
-		 */
 		reset() {
 			this._el.querySelector('form').reset();
 		}
 
-		/**
-		 * Обновить html компонента
-		 */
 		_updateHtml() {
 			this._el.innerHTML = this.template(this.data);
 		}
 
-		/**
-		 * Вставить управляющие элементы в форму
-		 */
 		_installControls() {
 			let {controls = []} = this.data;
 
@@ -52,10 +43,6 @@
 			});
 		}
 
-		/**
-		 * Взять данные формы
-		 * @return {object}
-		 */
 		getFormData() {
 			let form = this._el.querySelector('form');
 			let elements = form.elements;
