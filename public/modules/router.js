@@ -13,6 +13,7 @@
       this.history = window.history;
 
       Router.__instance = this;
+      window.addEventListener('hashchange', this.linkHandler.bind(this));
 
       return this;
     }
@@ -67,6 +68,11 @@
 
     forward() {
       this.history.forward();
+    }
+
+    linkHandler(event) {
+      const path = location.hash.replace('#', '');
+      this.go(path);
     }
   }
 
