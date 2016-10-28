@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for components/form/form.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">components/form/</a> form.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.81% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>4/27</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/2</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.29% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/7</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">14.81% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>4/27</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">(function () {
+  // import
+  const Block = window.Block;
+  const Button = window.Button;
+&nbsp;
+  class Form extends Block {
+&nbsp;
+    /**
+     * Конструктор класса Form
+     */
+    constructor<span class="fstat-no" title="function not covered" >(options = { data: {} }) {</span>
+<span class="cstat-no" title="statement not covered" >      super('form');</span>
+<span class="cstat-no" title="statement not covered" >      this.template = window.fest['form/form.tmpl'];</span>
+<span class="cstat-no" title="statement not covered" >      this.data = options.data;</span>
+<span class="cstat-no" title="statement not covered" >      this._el = options.el;</span>
+<span class="cstat-no" title="statement not covered" >      this.render();</span>
+    }
+&nbsp;
+    /**
+     * Обновляем HTML
+     */
+    render<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >      this._updateHtml();</span>
+<span class="cstat-no" title="statement not covered" >      this._installControls();</span>
+    }
+&nbsp;
+    reset<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >      this._el.querySelector('form').reset();</span>
+    }
+&nbsp;
+    _updateHtml<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >      this._el.innerHTML = this.template(this.data);</span>
+    }
+&nbsp;
+    _installControls<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >      const { controls = [] } = this.data;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      controls.forEach((data) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        const control = new Button({ text: data.text });</span>
+<span class="cstat-no" title="statement not covered" >        this._el.querySelector('.js-controls').appendChild(control._get());</span>
+      });
+    }
+&nbsp;
+    getFormData<span class="fstat-no" title="function not covered" >() {</span>
+<span class="cstat-no" title="statement not covered" >      const form = this._el.querySelector('form');</span>
+<span class="cstat-no" title="statement not covered" >      const elements = form.elements;</span>
+<span class="cstat-no" title="statement not covered" >      const fields = {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      Object.keys(elements).forEach((element) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        const name = elements[element].name;</span>
+<span class="cstat-no" title="statement not covered" >        const value = elements[element].value;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!name) {</span>
+<span class="cstat-no" title="statement not covered" >          return;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        fields[name] = value;</span>
+      });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return fields;</span>
+    }
+&nbsp;
+  }
+&nbsp;
+  // export
+  window.Form = Form;
+})();
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Oct 28 2016 14:14:26 GMT+0300 (MSK)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

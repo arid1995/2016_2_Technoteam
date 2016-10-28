@@ -12,6 +12,10 @@
 			this.attributes = Object.assign({}, this.defaults, attributes);
 		}
 
+    get host() {
+      return 'http://the-backend.herokuapp.com';
+    }
+
 		get defaults() {
 			return {};
 		}
@@ -49,6 +53,14 @@
 			return this.send(method, this.attributes);
 		}
 
+    fetch() {
+      return this.send('GET', { id: this.attributes.id })
+        .then(data => JSON.parse(data))
+        .then(json => {
+        this.attributes = json;
+        return this.attributes;
+    });
+ }
 	}
 
 	// export

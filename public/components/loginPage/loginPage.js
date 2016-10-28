@@ -1,10 +1,9 @@
 (function () {
-
   const Block = window.Block;
   const Form = window.Form;
   const User = window.User;
 
-  class LoginPage extends Block{
+  class LoginPage extends Block {
     constructor() {
       super('div');
 
@@ -20,26 +19,26 @@
         el: this._el.querySelector('.js-login-form'),
         data: {
           fields: [{
-            name: 'email',
-            type: 'email',
-            placeholder: 'Email'
+            name: 'login',
+            type: 'text',
+            placeholder: 'Login',
           },
           {
             name: 'password',
             type: 'password',
-            placeholder: 'Password'
+            placeholder: 'Password',
           }],
           controls: [{
             text: 'Sign in',
             attrs: {
-              type: 'submit'
-            }
-          }]
-        }
+              type: 'submit',
+            },
+          }],
+        },
       });
 
       this.form.render();
-      this.form.on('submit', this._login.bind(this))
+      this.form.on('submit', this._login.bind(this));
     }
 
     render() {
@@ -53,8 +52,8 @@
 
       const userData = {
         email: formData.email,
-        password: formData.password
-      }
+        password: formData.password,
+      };
 
       const user = new User(userData);
 
@@ -63,7 +62,7 @@
       }).catch(() => {
         this.router.go('/chat');
         alert('error');
-      })
+      });
     }
   }
   window.LoginPage = LoginPage;

@@ -1,115 +1,112 @@
 (function () {
-	'use strict';
-
-	// import
-	const Block = window.Block;
-	const Form = window.Form;
-	const Message = window.Message;
+  // import
+  const Block = window.Block;
+  const Form = window.Form;
+  const Message = window.Message;
 
 
-	class Chat extends Block {
+  class Chat extends Block {
 
-		constructor({data = {messages: [], username: '', email: ''}, el}) {
-			super('form');
-			this.template = window.fest['chat/chat.tmpl'];
-			this.data = data;
-			this._el = el;
+    constructor({ data = { messages: [], username: '', email: '' }, el }) {
+      super('form');
+      this.template = window.fest['chat/chat.tmpl'];
+      this.data = data;
+      this._el = el;
 
-			this.init();
-			this.render();
-		}
+      this.init();
+      this.render();
+    }
 
-		init() {
-			this._updateHtml();
-			this.form = new Form({
-				el: this._el.querySelector('.js-chat-form'),
-				data: {
-					fields: [
-						{
-							name: 'message',
-							type: 'text',
-							placeholder: 'Ваше сообщение'
-						}
-					],
-					controls: [
-						{
-							text: 'Отправить',
-							attrs: {
-								type: 'submit'
-							}
-						}
-					]
-				}
-			});
-			this.form.on('submit', this._sendMessage.bind(this));
+    init() {
+      this._updateHtml();
+      this.form = new Form({
+        el: this._el.querySelector('.js-chat-form'),
+        data: {
+          fields: [
+            {
+              name: 'message',
+              type: 'text',
+              placeholder: 'Ваше сообщение',
+            },
+          ],
+          controls: [
+            {
+              text: 'Отправить',
+              attrs: {
+                type: 'submit',
+              },
+            },
+          ],
+        },
+      });
+      this.form.on('submit', this._sendMessage.bind(this));
+    }
 
-		}
+    render() {
+      this._renderMessages();
+      this._renderForm();
+    }
 
-		render() {
-			this._renderMessages();
-			this._renderForm();
-		}
+    set(data) {
+      this.data = Object.assign({}, this.data, data);
+      return this.render();
+    }
 
-		set(data) {
-			this.data = Object.assign({}, this.data, data);
-			return this.render();
-		}
+    subscribe() {
+      technolibs.onMessage(this._updateMessages.bind(this));
+    }
 
-		subscribe() {
-			technolibs.onMessage(this._updateMessages.bind(this));
-		}
+    _sendMessage(event) {
+      event.preventDefault();
 
-		_sendMessage(event) {
-			event.preventDefault();
+      const data = {
+        message: this.form.getFormData().message,
+        email: this.data.email,
+      };
 
-			let data = {
-				message: this.form.getFormData().message,
-				email: this.data.email
-			};
+      const message = new Message(data);
 
-			let message = new Message(data);
+      message.save()
+        .then(() => {
+          this.form.reset();
+        });
+    }
 
-			message.save()
-				.then(data => {
-					this.form.reset();
-				});
-		}
+    _updateHtml() {
+      this.data.username = this.data.username || this.data.user || 'Anon';
+      this._el.innerHTML = this.template(this.data);
+    }
 
-		_updateHtml() {
-			this.data.username = this.data.username || this.data.user || 'Anon';
-			this._el.innerHTML = this.template(this.data);
-		}
+    _renderMessages() {
+      const wrapper = this._el.querySelector('.js-messages');
+      console.log(this.data);
 
-		_renderMessages() {
-			let wrapper = this._el.querySelector('.js-messages');
-			console.log(this.data);
+      wrapper.innerHTML = this.template({
+        block: 'chat__messages',
+        data: this.data.messages,
+      });
 
-			wrapper.innerHTML = this.template({
-				block: 'chat__messages',
-				data: this.data.messages
-			});
+      wrapper.scrollTop = wrapper.scrollHeight;
+    }
 
-			wrapper.scrollTop = wrapper.scrollHeight;
-		}
+    _renderForm() {
+      this.form.render();
+    }
 
-		_renderForm() {
-			this.form.render();
-		}
+    _updateMessages(data) {
+      const messages = Object.keys(data).map((key) => {
+        const entry = data[key];
 
-		_updateMessages(data) {
-			let messages = Object.keys(data).map(key => {
-				let entry = data[key];
+        entry.background = technolibs.colorHash(entry.email || '');
+        entry.isMy = this.data.email === entry.email;
 
-				entry.background = technolibs.colorHash(entry.email || '');
-				entry.isMy = this.data.email === entry.email;
+        return entry;
+      });
 
-				return entry;
-			});
+      this.set({ messages });
+      this._renderMessages();
+    }
+  }
 
-			this.set({messages});
-			this._renderMessages();
-		}
-	}
-
-	window.Chat = Chat;
+  window.Chat = Chat;
 })();

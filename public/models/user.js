@@ -1,28 +1,23 @@
 (function () {
-	'use strict';
+  // import
+  const Model = window.Model;
 
-	//import
-	let Model = window.Model;
+  class User extends Model {
 
-	class User extends Model {
+    get defaults() {
+      return {
+        name: '',
+        email: '',
+        password: '',
+      };
+    }
 
-		constructor(attributes) {
-			super(attributes);
-		}
+    get url() {
+      return `${this.host}/api/user/`;
+    }
 
-		get defaults() {
-			return {
-				email: '',
-				password: ''
-			}
-		}
+  }
 
-		get url() {
-			return '/user/';
-		}
-
-	}
-
-	//export
-	window.User = User;
+  // export
+  window.User = User;
 })();

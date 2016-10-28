@@ -1,28 +1,22 @@
 (function () {
-	'use strict';
+  // import
+  const Model = window.Model;
 
-	//import
-	let Model = window.Model;
+  class Message extends Model {
 
-	class Message extends Model {
+    get defaults() {
+      return {
+        name: 'Anon',
+        email: 'anon@mail.ru',
+      };
+    }
 
-		constructor(attributes) {
-			super(attributes);
-		}
+    get url() {
+      return '/api/messages/';
+    }
 
-		get defaults() {
-			return {
-				name: 'Anon',
-				email: 'anon@mail.ru'
-			}
-		}
+  }
 
-		get url() {
-			return '/api/messages/';
-		}
-
-	}
-
-	//export
-	window.Message = Message;
+  // export
+  window.Message = Message;
 })();

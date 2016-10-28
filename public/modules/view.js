@@ -1,68 +1,69 @@
 (function () {
-	'use strict';
+  class View {
+    constructor(options = {}) {
+      if (options.createElement) {
+        this.tagName = options.tagName || 'div';
+        this._el = document.createElement(this.tagName);
+      }
+    }
 
-	class View {
-		constructor(options = {}) {
-			if (options.createElement) {
-				this.tagName = options.tagName || 'div';
-				this._el = document.createElement(this.tagName);
-			}
-		}
+    init(options = {}) {
+      this.setAttrs(options.attrs);
+    }
 
-		init(options = {}) {
-			this.setAttrs(options.attrs);
-		}
+    pause(options = {}) {
+      this.hide();
+    }
 
-		pause(options = {}) {
-			this.hide();
-		}
+    resume(options = {}) {
+      this.show();
+    }
 
-		resume(options = {}) {
-			this.show();
-		}
+    show(options = {}) {
+      if (this._el) {
+        this._el.hidden = false;
+      }
+    }
 
-		show(options = {}) {
-			this._el.hidden = false;
-		}
+    hide(options = {}) {
+      if (this._el) {
+        this._el.hidden = true;
+      }
+    }
 
-		hide(options = {}) {
-			this._el.hidden = true;
-		}
+    render(options = {}) {
 
-		render(options = {}) {
+    }
 
-		}
+    appendTo(el) {
+      el.appendChild(this._el);
+    }
 
-		appendTo(el) {
-			el.appendChild(this._el);
-		}
+    remove() {
+      this._el && this._el.remove();
+    }
 
-		remove() {
-			this._el && this._el.remove();
-		}
+    setElement(el) {
+      this._el && this._el.remove();
+      this._el = el;
+    }
 
-		setElement(el) {
-			this._el && this._el.remove();
-			this._el = el;
-		}
+    setAttrs(attrs = {}) {
+      Object.keys(attrs).forEach((name) => {
+        this._el.setAttribute(name, attrs[name]);
+      });
+    }
 
-		setAttrs(attrs = {}) {
-			Object.keys(attrs).forEach(name => {
-				this._el.setAttribute(name, attrs[name]);
-			})
-		}
+    toString() {
+      return this._el.outerHTML;
+    }
 
-		toString() {
-			return this._el.outerHTML;
-		}
+    setRouter(router) {
+      this.router = router;
+    }
 
-		setRouter(router) {
-			this.router = router;
-		}
+  }
 
-	}
-
-	// export
-	window.View = View;
-
+  // export
+  window.View = View;
 })();
