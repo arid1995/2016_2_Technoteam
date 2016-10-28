@@ -1,5 +1,5 @@
 {
-  "name": "sample",
+  "name": "technoteam",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/frontend-park-mail-ru/sample.git"
+    "url": "git+https://github.com/frontend-park-mail-ru/2016_2_Technoteam.git"
   },
   "engines": {
     "node": "6.3.1"
