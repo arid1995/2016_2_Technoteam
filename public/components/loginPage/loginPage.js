@@ -1,7 +1,7 @@
 (function () {
   const Block = window.Block;
   const Form = window.Form;
-  const User = window.User;
+  const Session = window.Session;
 
   class LoginPage extends Block {
     constructor() {
@@ -50,17 +50,17 @@
 
       const formData = this.form.getFormData();
 
-      const userData = {
-        email: formData.email,
+      const sessionData = {
+        login: formData.login,
         password: formData.password,
       };
 
-      const user = new User(userData);
+      const session = new Session(sessionData);
 
-      user.save().then(() => {
+      session.save().then(() => {
         this.form.reset();
+        this.router.go('/menu');
       }).catch(() => {
-        this.router.go('/chat');
         alert('error');
       });
     }

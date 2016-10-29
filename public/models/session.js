@@ -6,7 +6,7 @@
 
     get defaults() {
       return {
-        name: '',
+        login: '',
         password: '',
       };
     }

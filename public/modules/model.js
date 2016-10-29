@@ -1,68 +1,68 @@
 (function () {
-	'use strict';
+  class Model {
 
-	class Model {
-
-		constructor(attributes = {}) {
-			Object.keys(attributes).forEach(key => {
-				if (attributes[key] === undefined) {
-					delete attributes[key];
-				}
-			})
-			this.attributes = Object.assign({}, this.defaults, attributes);
-		}
-
-    get host() {
-      return 'http://the-backend.herokuapp.com';
+    constructor(attributes = {}) {
+      Object.keys(attributes).forEach((key) => {
+        if (attributes[key] === undefined) {
+          delete attributes[key];
+        }
+      });
+      this.attributes = Object.assign({}, this.defaults, attributes);
     }
 
-		get defaults() {
-			return {};
-		}
+    get host() {
+      return 'http://127.0.0.1:8080';
+    }
 
-		get url() {
-			return '/';
-		}
+    get defaults() {
+      return {};
+    }
 
-		send(method, data = {}) {
-			return new Promise((resolve, reject) => {
-				let xhr = new XMLHttpRequest();
-				xhr.open(method, this.url, true);
-				xhr.setRequestHeader('Content-Type', 'application/json');
+    get url() {
+      return '/';
+    }
 
-				xhr.onreadystatechange = function () {
-					if (xhr.readyState === 4) {
-            if(xhr.status === 200) {
+    send(method, data = {}) {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(method, this.url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
               resolve(xhr.responseText);
             }
             reject();
-					}
-				}
+          }
+        };
 
-				xhr.onerror = function () {
-					reject();
-				}
+        xhr.onerror = function () {
+          alert(xhr.message);
+          reject();
+        };
 
-				xhr.send(JSON.stringify(data));
-			});
-		}
+        console.log(JSON.stringify(data));
+        xhr.send(JSON.stringify(data));
+      });
+    }
 
-		save() {
-			let method = this.attributes.id ? 'PUT' : 'POST';
+    save() {
+      const method = this.attributes.id ? 'PUT' : 'POST';
 
-			return this.send(method, this.attributes);
-		}
+      return this.send(method, this.attributes);
+    }
 
     fetch() {
       return this.send('GET', { id: this.attributes.id })
         .then(data => JSON.parse(data))
-        .then(json => {
-        this.attributes = json;
-        return this.attributes;
-    });
- }
-	}
+        .then((json) => {
+          this.attributes = json;
+          return this.attributes;
+        });
+    }
+  }
 
-	// export
-	window.Model = Model;
+  // export
+  window.Model = Model;
 })();

@@ -61,7 +61,7 @@
       const formData = this.form.getFormData();
 
       const userData = {
-        name: formData.name,
+        login: formData.login,
         email: formData.email,
         password: formData.password,
       };
@@ -69,9 +69,8 @@
       const user = new User(userData);
 
       user.save().then(() => {
-        this.form.reset();
+        this.router.go('/');
       }).catch(() => {
-        this.router.go('/chat');
         alert('error');
       });
     }
