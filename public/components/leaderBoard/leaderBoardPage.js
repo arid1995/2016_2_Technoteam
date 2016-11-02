@@ -19,5 +19,6 @@
       this._el.innerHTML = this.template(this.userList);
     }
   }
+
   window.LeaderBoardPage = LeaderBoardPage;
 })();
