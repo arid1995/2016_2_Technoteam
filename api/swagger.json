@@ -1,0 +1,249 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "1.0.0",
+		"title": "Angry API"
+	},
+	"basePath": "/api",
+	"paths": {
+		"/session": {
+			"get": {
+				"description": "",
+				"responses": {
+					"200": {
+						"description": "User is authenticated",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "User is not authenticated",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			},
+			"post": {
+				"description": "",
+				"parameters": [
+					{
+						"name": "user",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"type": "object",
+							"properties": {
+								"login": {
+									"type": "string"
+								},
+								"password": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "User is successfully authenticated",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer"
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Non-existent user",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			},
+			"delete": {
+				"description": "",
+				"responses": {
+					"200": {
+						"description": "User is successfully logged out",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/user": {
+			"post": {
+				"description": "",
+				"parameters": [
+					{
+						"name": "user",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/UserProfile"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "User is successfully created",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer"
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "User already exists",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/user/{id}": {
+			"get": {
+				"description": "",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "User with given id exists",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"login": {
+									"type": "string"
+								},
+								"email": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"401": {
+						"description": "User with given id does not exist",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			},
+			"put": {
+				"description": "",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"in": "body",
+						"name": "user",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/UserProfile"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "User with given id is successfully edited",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer"
+								}
+							}
+						}
+					},
+					"403": {
+						"description": "Access denied",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"id": {
+									"type": "integer"
+								},
+								"message": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"description": "",
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "User is successfully deleted",
+						"schema": {
+							"type": "object"
+						}
+					},
+					"403": {
+						"description": "Access denied",
+						"schema": {
+							"type": "object",
+							"properties": {
+								"message": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"UserProfile": {
+			"type": "object",
+			"properties": {
+				"login": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				},
+				"email": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
