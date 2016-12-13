@@ -4,7 +4,7 @@
       <th>Login</th>
       <th>Score</th>
     </tr>
-    <fest:for iterate="data.userList" index="i" value="user">
+    <fest:for iterate="data" index="i" value="user">
 				<tr>
           <td><fest:value output="js">user.login</fest:value></td>
           <td class="score"><fest:value output="js">user.score</fest:value></td>
