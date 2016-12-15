@@ -16,6 +16,10 @@
         this._component.setRouter(this.router);
       }
 
+      if (localStorage.getItem('session') !== null) {
+        this.router.go('/menu');
+        return;
+      }
       this.show();
     }
   }

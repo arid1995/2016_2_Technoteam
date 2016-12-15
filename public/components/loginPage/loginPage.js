@@ -57,8 +57,9 @@
 
       const session = new Session(sessionData);
 
-      session.save().then(() => {
+      session.save().then((session) => {
         this.form.reset();
+        localStorage.setItem('session', session);
         this.router.go('/menu');
       }).catch(() => {
         alert('error');
