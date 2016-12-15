@@ -1,5 +1,5 @@
 (function () {
-  const Route = window.Route;
+  const Route = require('../modules/route').Route;
 
   class Router {
     constructor() {
@@ -76,5 +76,5 @@
     }
   }
 
-  window.Router = Router;
+  exports.Router = Router;
 })();

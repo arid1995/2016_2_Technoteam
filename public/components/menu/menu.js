@@ -1,5 +1,5 @@
 (function () {
-  const Block = window.Block;
+  const Block = require('../block/block').Block;
 
   class Menu extends Block {
     constructor() {
@@ -16,5 +16,5 @@
     }
   }
 
-  window.Menu = Menu;
+  exports.Menu = Menu;
 })();

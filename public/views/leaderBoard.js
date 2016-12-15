@@ -1,6 +1,7 @@
 (function () {
-  const View = window.View;
-  const LeaderBoardPage = window.LeaderBoardPage;
+  const View = require('../modules/view').View;
+  const LeaderBoardPage =
+      require('../components/leaderBoardPage/leaderBoardPage').LeaderBoardPage;
 
   class LeaderBoardPageView extends View {
     constructor(options = {}) {
@@ -15,11 +16,16 @@
         this._component.setRouter(this.router);
       }
 
+      if (localStorage.getItem('session') === null) {
+        this.router.go('/loginPage');
+        return;
+      }
+
       this.show();
     }
   }
 
 
   // export
-  window.LeaderBoardPageView = LeaderBoardPageView;
+  exports.LeaderBoardPageView = LeaderBoardPageView;
 })();

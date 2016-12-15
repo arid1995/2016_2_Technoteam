@@ -43,5 +43,5 @@
 
 
   // export
-  window.pathToRegex = pathToRegex;
+  exports.pathToRegex = pathToRegex;
 })();

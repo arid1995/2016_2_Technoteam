@@ -1,5 +1,5 @@
 (function () {
-  const Block = window.Block;
+  const Block = require('../block/block').Block;
 
   class Button extends Block {
     constructor(options) {
@@ -10,5 +10,5 @@
   }
 
   // export
-  window.Button = Button;
+  exports.Button = Button;
 })();

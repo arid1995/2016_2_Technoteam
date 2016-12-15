@@ -1,7 +1,7 @@
 (function () {
-  const Block = window.Block;
-  const Form = window.Form;
-  const User = window.User;
+  const Block = require('../block/block').Block;
+  const Form = require('../form/form').Form;
+  const User = require('../../models/user').User;
 
   class RegistrationPage extends Block {
     constructor() {
@@ -75,5 +75,5 @@
       });
     }
   }
-  window.RegistrationPage = RegistrationPage;
+  exports.RegistrationPage = RegistrationPage;
 })();

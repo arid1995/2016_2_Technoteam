@@ -65,5 +65,5 @@
   }
 
   // export
-  window.View = View;
+  exports.View = View;
 })();

@@ -56,5 +56,5 @@
   }
 
   //   export
-  window.Block = Block;
+  exports.Block = Block;
 })();

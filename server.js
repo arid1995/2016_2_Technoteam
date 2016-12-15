@@ -9,6 +9,7 @@ app.use('/chat', express.static('public', { maxAge: 1 }));
 app.use('/registration', express.static('public', { maxAge: 1 }));
 app.use('/leaderboard', express.static('public', { maxAge: 1 }));
 app.use('/menu', express.static('public', { maxAge: 1 }));
+app.use('/game', express.static('public', { maxAge: 1 }));
 
 app.use(parser.json());
 

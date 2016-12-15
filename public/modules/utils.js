@@ -46,8 +46,8 @@
     return result;
   };
 
-  window.hello = hello;
-  window.filter = filter;
-  window.plural = plural;
-  window.plur = plur;
+  exports.hello = hello;
+  exports.filter = filter;
+  exports.plural = plural;
+  exports.plur = plur;
 })();

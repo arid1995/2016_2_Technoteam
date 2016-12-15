@@ -1,6 +1,6 @@
 (function () {
   // import
-  const Model = window.Model;
+  const Model = require('../modules/model').Model;
 
   class Session extends Model {
 
@@ -17,5 +17,5 @@
   }
 
   // export
-  window.Session = Session;
+  exports.Session = Session;
 })();

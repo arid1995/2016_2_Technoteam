@@ -1,7 +1,7 @@
 (function () {
-  const View = window.View;
-  const Form = window.Form;
-  const RegistrationPage = window.RegistrationPage;
+  const View = require('../modules/view').View;
+  const Form = require('../components/form/form').Form;
+  const RegistrationPage = require('../components/registrationPage/registrationPage').RegistrationPage;
 
   class RegistrationPageView extends View {
     constructor(options = {}) {
@@ -22,5 +22,5 @@
 
 
   // export
-  window.RegistrationPageView = RegistrationPageView;
+  exports.RegistrationPageView = RegistrationPageView;
 })();

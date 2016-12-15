@@ -1,7 +1,7 @@
 (function () {
-  const View = window.View;
-  const Form = window.Form;
-  const LoginPage = window.LoginPage;
+  const View = require('../modules/view').View;
+  const Form = require('../components/form/form').Form;
+  const LoginPage = require('../components/loginPage/loginPage').LoginPage;
 
   class LoginPageView extends View {
     constructor(options = {}) {
@@ -16,11 +16,15 @@
         this._component.setRouter(this.router);
       }
 
+      if (localStorage.getItem('session') !== null) {
+        this.router.go('/menu');
+        return;
+      }
       this.show();
     }
   }
 
 
   // export
-  window.LoginPageView = LoginPageView;
+  exports.LoginPageView = LoginPageView;
 })();

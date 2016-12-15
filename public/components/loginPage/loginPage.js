@@ -1,7 +1,7 @@
 (function () {
-  const Block = window.Block;
-  const Form = window.Form;
-  const Session = window.Session;
+  const Block = require('../block/block').Block;
+  const Form = require('../form/form').Form;
+  const Session = require('../../models/session').Session;
 
   class LoginPage extends Block {
     constructor() {
@@ -57,13 +57,14 @@
 
       const session = new Session(sessionData);
 
-      session.save().then(() => {
+      session.save().then((session) => {
         this.form.reset();
+        localStorage.setItem('session', session);
         this.router.go('/menu');
       }).catch(() => {
         alert('error');
       });
     }
   }
-  window.LoginPage = LoginPage;
+  exports.LoginPage = LoginPage;
 })();
