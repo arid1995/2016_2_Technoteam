@@ -1,8 +1,7 @@
 (function () {
-  const Block = window.Block;
-  const Button = window.Button;
-  const Auth = window.Auth;
-  const GameLauncher = window.GameLauncher;
+  const Block = require('../block/block').Block;
+  const Button = require('../button/button').Button;
+  const GameLauncher = require('../../mechanics/gameLauncher').GameLauncher;
 
   class Game extends Block {
     constructor() {
@@ -35,5 +34,5 @@
     }
   }
 
-  window.Game = Game;
+  exports.Game = Game;
 })();

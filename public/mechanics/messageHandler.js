@@ -6,5 +6,5 @@
     }
   }
 
-  window.MessageHandler = MessageHandler;
+  exports.MessageHandler = MessageHandler;
 })();

@@ -5,7 +5,7 @@
   class Route {
     constructor(pathname, view, options = {}) {
       // TODO: Сущий адище, нам нужно менеджерить депсы
-      this.pathToRegex = window.pathToRegex;
+      this.pathToRegex = require('./pathToRegex').pathToRegex;
 
       this.id = `p${id}`;
       id++;
@@ -49,5 +49,5 @@
   }
 
   // export
-  window.Route = Route;
+  exports.Route = Route;
 })();

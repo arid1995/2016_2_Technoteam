@@ -1,6 +1,6 @@
 (function () {
   // import
-  const Model = window.Model;
+  const Model = require('../modules/model').Model;
 
   class User extends Model {
 
@@ -19,5 +19,5 @@
   }
 
   // export
-  window.User = User;
+  exports.User = User;
 })();

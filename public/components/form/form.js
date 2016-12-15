@@ -1,7 +1,7 @@
 (function () {
   // import
-  const Block = window.Block;
-  const Button = window.Button;
+  const Block = require('../block/block').Block;
+  const Button = require('../button/button').Button;
 
   class Form extends Block {
 
@@ -63,5 +63,5 @@
   }
 
   // export
-  window.Form = Form;
+  exports.Form = Form;
 })();

@@ -1,5 +1,5 @@
 (function () {
-  Drawable = window.Drawable;
+  Drawable = require('./drawable').Drawable;
 
   class Circle extends Drawable {
     draw(context) {
@@ -7,5 +7,5 @@
     }
   }
 
-  window.Circle = circle;
+  exports.Circle = circle;
 })();

@@ -3,3 +3,4 @@ public/api
 npm_debug.log
 *.tmpl.js
 public/coverage/
+angry.js

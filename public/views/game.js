@@ -1,7 +1,7 @@
 (function () {
-  const View = window.View;
-  const Game = window.Game;
-  const Session = window.Session;
+  const View = require('../modules/view').View;
+  const Game = require('../components/game/game').Game;
+  const Session = require('../models/session').Session;
 
   class GameView extends View {
     constructor(options = {}) {
@@ -31,5 +31,5 @@
   }
 
   // export
-  window.GameView = GameView;
+  exports.GameView = GameView;
 })();

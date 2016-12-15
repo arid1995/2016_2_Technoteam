@@ -1,6 +1,6 @@
 (function () {
-  const View = window.View;
-  const Menu = window.Menu;
+  const View = require('../modules/view').View;
+  const Menu = require('../components/menu/menu').Menu;
 
   class MenuView extends View {
     constructor(options = {}) {
@@ -25,5 +25,5 @@
   }
 
   // export
-  window.MenuView = MenuView;
+  exports.MenuView = MenuView;
 })();

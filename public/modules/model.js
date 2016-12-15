@@ -64,5 +64,5 @@
   }
 
   // export
-  window.Model = Model;
+  exports.Model = Model;
 })();

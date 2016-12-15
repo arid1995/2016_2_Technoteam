@@ -15,5 +15,5 @@
     }
   }
 
-  window.Drawer = Drawer;
+  exports.Drawer = Drawer;
 })();

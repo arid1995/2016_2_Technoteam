@@ -1,6 +1,6 @@
 (function () {
-  const MessageHandler = window.MessageHandler;
-  const Drawer = window.Drawer;
+  const MessageHandler = require('./messageHandler').MessageHandler;
+  const Drawer = require('./drawer').Drawer;
 
   class GameLauncher {
     constructor(canvas) {
@@ -44,5 +44,5 @@
     }
   }
 
-  window.GameLauncher = GameLauncher;
+  exports.GameLauncher = GameLauncher;
 })();

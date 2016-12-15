@@ -14,5 +14,5 @@
     }
   }
 
-  window.Drawable = Drawable;
+  exports.Drawable = Drawable;
 })();

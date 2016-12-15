@@ -7,6 +7,7 @@
     "test": "karma start --single-run",
     "lint": "./node_modules/.bin/eslint public/components/**/*.js",
     "fest": "./node_modules/.bin/fest-build --dir=public/components/",
+    "webpack": "./node_modules/.bin/webpack",
     "karma:start": "karma start",
     "karma:run": "karma run",
     "start": "node server.js"

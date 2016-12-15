@@ -1,7 +1,7 @@
 (function () {
-  const Block = window.Block;
-  const Form = window.Form;
-  const Session = window.Session;
+  const Block = require('../block/block').Block;
+  const Form = require('../form/form').Form;
+  const Session = require('../../models/session').Session;
 
   class LoginPage extends Block {
     constructor() {
@@ -66,5 +66,5 @@
       });
     }
   }
-  window.LoginPage = LoginPage;
+  exports.LoginPage = LoginPage;
 })();

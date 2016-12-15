@@ -1,6 +1,6 @@
 (function () {
-  const Block = window.Block;
-  const UserList = window.UserList;
+  const Block = require('../block/block').Block;
+  const UserList = require('../../models/userList').UserList;
 
   class LeaderBoardPage extends Block {
     constructor() {
@@ -18,5 +18,5 @@
       this._el.innerHTML = this.template(data);
     }
   }
-  window.LeaderBoardPage = LeaderBoardPage;
+  exports.LeaderBoardPage = LeaderBoardPage;
 })();
