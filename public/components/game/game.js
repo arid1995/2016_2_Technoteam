@@ -20,8 +20,8 @@
 
     createAndConfigureCanvas() {
       this._canvas = document.createElement('canvas');
-      this._canvas.width = window.screen.width;
-      this._canvas.height = window.screen.height * 0.98;
+      this._canvas.width = window.innerWidth;
+      this._canvas.height = window.innerHeight * 0.98;
       this.append(this._canvas);
     }
 

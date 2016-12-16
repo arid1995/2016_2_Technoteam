@@ -1,4 +1,3 @@
-(function () {
   const Router = require('./modules/router').Router;
   const LoginPageView = require('./views/loginPage').LoginPageView;
   const RegistrationPageView = require('./views/registrationPage').RegistrationPageView;
@@ -13,4 +12,3 @@
     .addRoute('/game', GameView)
     .addRoute('/', LoginPageView)
     .start();
-})();

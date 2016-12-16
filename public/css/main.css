@@ -63,6 +63,6 @@ td {
 }
 
 body {
-	padding: 5vw;
+  padding: 0px !important;
 	box-sizing: border-box;
 }

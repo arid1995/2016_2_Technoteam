@@ -29,6 +29,9 @@
     "webpack": "^1.14.0"
   },
   "devDependencies": {
+    "babel-core": "^6.20.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-es2015": "^6.18.0",
     "bootprint-swagger": "^0.13.1",
     "eslint": "^3.6.1",
     "eslint-config-airbnb": "11.1.0",
