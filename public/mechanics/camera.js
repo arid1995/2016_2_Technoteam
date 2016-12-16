@@ -1,5 +1,4 @@
 (function () {
-  const Scene = require('./scene').Scene;
   const Drawable = require('./drawable').Drawable;
 
   class Camera {
@@ -13,13 +12,11 @@
       this.frame.width = canvas.width;
       this.frame.height = canvas.height;
       this.frame.zoom = 1;
-
-      this.scene = new Scene();
     }
 
     setPosition(x = 0, y = 0) {
-      this.frame.x = x;
-      this.frame.y = y;
+      this.frame.x = x * this.frame.zoom;
+      this.frame.y = y * this.frame.zoom;
     }
 
     setZoom(zoom = 1) {
