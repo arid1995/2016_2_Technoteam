@@ -9,7 +9,7 @@
     }
 
     draw(context, frame) {
-      context.fillStyle = 'green';
+      context.fillStyle = '#ffffff';
       context.fillRect((this.x - frame.x) / frame.zoom,
             (this.y - frame.y) / frame.zoom, this.width / frame.zoom,
             this.height / frame.zoom);

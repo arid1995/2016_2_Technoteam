@@ -2,7 +2,7 @@
   const Drawable = require('./drawable').Drawable;
 
   class Camera {
-    constructor(canvas) {
+    constructor(canvas, boundaries) {
       this.canvas = canvas;
       this.context = this.canvas.getContext('2d');
 
@@ -12,11 +12,19 @@
       this.frame.width = canvas.width;
       this.frame.height = canvas.height;
       this.frame.zoom = 1;
+      this.boundaries = boundaries;
     }
 
-    setPosition(x = 0, y = 0) {
-      this.frame.x = x * this.frame.zoom;
-      this.frame.y = y * this.frame.zoom;
+    move(velocityX = 0, velocityY = 0) {
+      if ((this.frame.x + this.frame.width) - velocityX <= this.boundaries.width
+            && this.frame.x + velocityX >= 0) {
+        this.frame.x += velocityX;
+      }
+
+      if ((this.frame.y + this.frame.height) - velocityY <= this.boundaries.height
+            && this.frame.y + velocityY >= 0) {
+        this.frame.y += velocityY;
+      }
     }
 
     setZoom(zoom = 1) {
@@ -28,6 +36,9 @@
       if (zoom > 10) {
         this.frame.zoom = 10;
       }
+
+      this.frame.width = this.canvas.width * zoom;
+      this.frame.height = this.canvas.height * zoom;
     }
 
     redraw(drawables = {}) {

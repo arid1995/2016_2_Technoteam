@@ -17,7 +17,7 @@
       }
 
       if (localStorage.getItem('session') === null) {
-        this.router.go('/loginPage');
+        this.router.go('/');
         return;
       }
 
