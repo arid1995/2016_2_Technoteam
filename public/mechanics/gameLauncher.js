@@ -1,6 +1,7 @@
 (function () {
   const MessageHandler = require('./messageHandler').MessageHandler;
-  const Scene = require('./scene').Scene;
+  //const Scene = require('./scene').Scene;
+  const Game = require('./game').Game;
 
   class GameLauncher {
     constructor(canvas) {
@@ -9,7 +10,7 @@
     }
 
     launch() {
-      this.socket = new WebSocket('ws://127.0.0.1:8080/gameapi');
+      this.socket = new WebSocket('ws://37.204.2.4:8080/gameapi');
 
       this.socket.onmessage = (event) => {
         this.messageHandler(event.data);
@@ -19,7 +20,7 @@
         alert(`Ошибка ${error.message}`);
       };
 
-      this.scene = new Scene(this.canvas);
+      this.game = new Game(this.canvas);
     }
 
     stop() {
