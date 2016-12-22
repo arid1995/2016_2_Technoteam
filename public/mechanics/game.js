@@ -1,6 +1,7 @@
 (function(){
 const Box2D = require('./Box2dWeb-2.1.a.3.min').Box2D
 const Event = require('./event').Event;
+const TICK = 30;
 
 var b2Vec2 = Box2D.Common.Math.b2Vec2;
 var b2BodyDef = Box2D.Dynamics.b2BodyDef;
@@ -12,18 +13,16 @@ var b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape;
 var b2CircleShape = Box2D.Collision.Shapes.b2CircleShape;
 var b2DebugDraw = Box2D.Dynamics.b2DebugDraw;
 
-class Game {
-	constructor(canvas, socket){
-
 var current = 0;
 
 var game = {
-	init: function(){
-
+	init: function(canvas, socket){
+		game.canvas = canvas;
+		game.socket = socket;
 		levels.init();
 		loader.init();
 		mouse.init();
-
+		game.loop();
 		/*var xhr = new XMLHttpRequest();
 		xhr.open('GET', 'http://37.204.2.4:8081/api/session/', false);
 		xhr.send();
@@ -38,17 +37,19 @@ var game = {
 			alert( xhr.status + ': ' + xhr.statusText ); // пример вывода: 404: Not Found
 		} else {
 			json = JSON.parse(xhr.responseText); // responseText -- текст ответа.
-		}
+		}*/
 
-		//game.event = new Event();
-		game.id = json.id;
-		game.login = json.login;
-		alert(game.id);*/
-		//game.event.send("ready", {game.login, game.id});
-
+		game.event = new Event(game.socket);
+		/*game.id = 19;
+		game.login = "arid995";*/
 		game.context = game.canvas.getContext('2d');
+		/*var message = {username: game.login, id: game.id};
+		var json = JSON.stringify(message);
+		game.event.send("ready", json);*/
 	},
-
+	setBodies:function(arr){
+		game.arrOfBodies = arr;
+	},
 	mode:"intro",
 	socket:null,
 	slingshotX:[100, 950],
@@ -60,6 +61,23 @@ var game = {
 		game.offsetLeft = 0;
 		game.ended = false;
 		game.animationFrame = window.requestAnimationFrame(game.animate,game.canvas);
+	},
+
+	loop:function(){
+		const before = Date.now();
+		if(game.turn){
+			var arr = [];
+			for (var body = box2d.world.GetBodyList(); body; body = body.GetNext()) {
+				arr.push(body.GetPosition());
+				arr.push(body.GetAngle());
+			}
+			var arrjson = JSON.stringify(arr);
+			var message = {room: game.room, objects: arrjson};
+			var json = JSON.stringify(message);
+			game.event.send("fieldState", json);
+		}
+		const after = Date.now();
+		setTimeout(this.loop.bind(this), TICK - (after - before));
 	},
 
 	maxSpeed:3,
@@ -111,8 +129,6 @@ var game = {
 		var position = game.currentHero.GetPosition();
 		var distanceSquared = Math.pow(position.x*box2d.scale - mouse.x-game.offsetLeft,2) + Math.pow(position.y*box2d.scale-mouse.y,2);
 		var radiusSquared = Math.pow(game.currentHero.GetUserData().radius,2);
-		console.log(position.x*box2d.scale - mouse.x-game.offsetLeft);
-		console.log(game.currentHero.GetUserData().radius);
 
 		return (distanceSquared<= radiusSquared);
 	},
@@ -203,7 +219,6 @@ var game = {
 
 	animate:function(){
 		game.handlePanning();
-
 			var currentTime = new Date().getTime();
 			var timeStep;
 			if (game.lastUpdateTime){
@@ -224,26 +239,32 @@ var game = {
 	},
 	drawAllBodies:function(){
 		box2d.world.DrawDebugData();
-
+		var i = 0;
 		for (var body = box2d.world.GetBodyList(); body; body = body.GetNext()) {
+			console.log(game.turn, game.flag);
+			if(game.turn == false && game.flag){
+				body.SetPosition(game.arrOfBodies[i]);
+				i++;
+				console.log("position: " + game.arrOfBodies[i-1])
+				body.SetAngle(game.arrOfBodies[i]);
+				i++;
+				console.log("angle: " + game.arrOfBodies[i-1])
+			}
 			var entity = body.GetUserData();
-
 			if(entity){
 				var entityX = body.GetPosition().x*box2d.scale;
-				if(entityX<0|| entityX>game.canvas.width||(entity.health && entity.health <0)){
+				/*if(entityX<0|| entityX>game.canvas.width||(entity.health && entity.health <0)){
 					box2d.world.DestroyBody(body);
 					if (entity.type=="villain"){
 						game.score += entity.calories;
 					}
-				} else {
+				} else {*/
 					entities.draw(entity,body.GetPosition(),body.GetAngle())
-				}
+				//}
 			}
 		}
 	},
 }
-
-game.canvas = canvas;
 
 var levels = {
 	data:[
@@ -548,9 +569,6 @@ var mouse = {
 		mouse.dragging = false;
 	}
 }
-game.init(socket);
-}
-}
 
-exports.Game = Game;
+exports.game = game;
 })();

@@ -1,13 +1,27 @@
 (function () {
   class MessageHandler {
 
+
+    setGame(g){
+      this.game = g;
+    }
+
     handle(message) {
-        json = JSON.parse(message);
+        var json = JSON.parse(message);
         switch(json.type){
           case "confirmRequest":
-            alert("confirm request");
+            //alert("confirm request");
           case "opponentFound":
-            alert("start");
+            this.game.room = json.data.room;
+            this.game.turn = json.data.turn;
+            break;
+          case "fieldState":
+            var data = JSON.parse(json.data);
+            this.game.flag = true;
+            this.game.setBodies(data);
+            break;
+          case "event":
+            this.game.turn = json.data;
         }
     }
   }
