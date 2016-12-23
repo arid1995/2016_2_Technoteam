@@ -435,7 +435,7 @@ var box2d = {
 		var debugDraw = new b2DebugDraw();
 		debugDraw.SetSprite(debugContext);
 		debugDraw.SetDrawScale(box2d.scale);
-		debugDraw.SetFillAlpha(0.3);
+		debugDraw.SetFillAlpha(0.25);
 		debugDraw.SetLineThickness(1.0);
 		debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
 		box2d.world.SetDebugDraw(debugDraw);
