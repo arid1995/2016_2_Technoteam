@@ -11,6 +11,11 @@
     }
 
     resume() {
+      if (localStorage.getItem('session') !== null) {
+        this.router.go('/menu');
+        return;
+      }
+
       if (!this.component) {
         this._component = new RegistrationPage();
         this._component.setRouter(this.router);

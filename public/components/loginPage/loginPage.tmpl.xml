@@ -2,4 +2,5 @@
   <h1>Login</h1>
   <div class="js-login-form"></div>
   <center><a class="registration-link" href="#/registration">new here?</a></center>
+  <center><a class="registration-link" href="#/game">Play as a guest</a></center>
 </fest:template>

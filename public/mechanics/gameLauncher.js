@@ -24,7 +24,7 @@
       };
 
       this.socket.onopen = () => {
-        var message = {username: "arid995", id: 19};
+        var message = {username: "guest", id: 0};
     		var json = JSON.stringify(message);
     		this.event.send("ready", json);
       };

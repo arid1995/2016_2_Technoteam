@@ -17,7 +17,7 @@
       }
 
       if (localStorage.getItem('session') !== null) {
-        this.router.go('/');
+        this.router.go('/menu');
         return;
       }
       this.show();

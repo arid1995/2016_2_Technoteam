@@ -10,14 +10,14 @@
     }
 
     resume() {
-      if (!this.component) {
-        this._component = new Menu();
-        this._component.setRouter(this.router);
-      }
-
       if (localStorage.getItem('session') === null) {
         this.router.go('/');
         return;
+      }
+
+      if (!this.component) {
+        this._component = new Menu();
+        this._component.setRouter(this.router);
       }
 
       this.show();

@@ -2,6 +2,7 @@
   const Block = require('../block/block').Block;
   const Form = require('../form/form').Form;
   const User = require('../../models/user').User;
+  const Session = require('../../models/session').Session;
 
   class RegistrationPage extends Block {
     constructor() {
@@ -69,9 +70,21 @@
       const user = new User(userData);
 
       user.save().then(() => {
-        this.router.go('/');
+        const formData = this.form.getFormData();
+        const sessionData = {
+          login: formData.login,
+          password: formData.password,
+        };
+        const session = new Session(sessionData);
+
+        session.save().then((session) => {
+          localStorage.setItem('session', session);
+          this.router.go('/menu');
+        }).catch(() => {
+          alert('signin error');
+        });
       }).catch(() => {
-        alert('error');
+        alert('signup error');
       });
     }
   }

@@ -19,4 +19,5 @@
         </tr>
 		</fest:for>
 </table>
+<center><a href="#/menu">Menu</a></center>
 </fest:template>
