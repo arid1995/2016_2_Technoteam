@@ -6,8 +6,16 @@
     </tr>
     <fest:for iterate="data" index="i" value="user">
 				<tr>
-          <td><fest:value output="js">user.login</fest:value></td>
-          <td class="score"><fest:value output="js">user.score</fest:value></td>
+            <fest:choose>
+              <fest:when test="data.login==user.login">
+                  <td><fest:value output="js">user.login</fest:value></td>
+                  <td class="score"><fest:value output="js">user.score</fest:value></td>
+              </fest:when>
+              <fest:otherwise>
+                <td><font color="#aaaaaa"><fest:value output="js">user.login</fest:value></font></td>
+                <td class="score"><font color="#aaaaaa"><fest:value output="js">user.score</fest:value></font></td>
+              </fest:otherwise>
+            </fest:choose>
         </tr>
 		</fest:for>
 </table>

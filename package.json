@@ -26,7 +26,8 @@
     "express": "^4.14.0",
     "json-schema-mock": "0.0.8",
     "matter-js": "^0.11.1",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "fest-loader": "^1.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.20.0",

@@ -2,4 +2,5 @@
   <h1>MENU</h1>
   <center><a class="leaderboard-link" href="#/game">Play</a></center>
   <center><a class="leaderboard-link" href="#/leaderboard">See leaders</a></center>
+  <center><a class="leaderboard__exit" href="#">Exit</a></center>
 </fest:template>

@@ -11,7 +11,10 @@
 
       const userList = new UserList();
 
-      userList.fetch().then(data => this.render(data));
+      userList.fetch().then((data) => {
+        data.login = JSON.parse(localStorage.getItem('session')).login;
+        this.render(data);
+      });
     }
 
     render(data) {

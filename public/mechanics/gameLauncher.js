@@ -1,6 +1,6 @@
 (function () {
   const MessageHandler = require('./messageHandler').MessageHandler;
-  //const Scene = require('./scene').Scene;
+  // const Scene = require('./scene').Scene;
   const game = require('./game').game;
   const Event = require('./event').Event;
 
@@ -12,7 +12,7 @@
     }
 
     launch() {
-      this.socket = new WebSocket('ws://37.204.2.4:8081/gameapi');
+      this.socket = new WebSocket('ws://angrybirds.ml:8081/gameapi');
       this.event = new Event(this.socket);
 
       this.socket.onmessage = (event) => {

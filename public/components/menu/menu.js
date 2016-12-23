@@ -13,6 +13,13 @@
 
     render() {
       this._el.innerHTML = this.template({});
+
+      document.querySelector('.leaderboard__exit')
+      .addEventListener('click', (event) => {
+        event.preventDefault();
+        localStorage.removeItem('session');
+        this.router.go('/');
+      });
     }
   }
 

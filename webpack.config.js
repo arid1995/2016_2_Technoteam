@@ -6,15 +6,15 @@ module.exports = {
     path: './public/bin',
     filename: 'angry.bundle.js',
   },
-  /*module: {
-    loaders: [{
-      exclude: /node_modules/,
-      loader: 'babel-loader',
+  module: {
+    loaders: [
+      /* loader: 'babel-loader',
       query: {
         presets: ['es2015'],
-      },
-    }],
-  },
+      },*/
+      { test: /\.tmpl\.xml/, loader: 'fest-loader' },
+    ],
+  }, /*
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: {
