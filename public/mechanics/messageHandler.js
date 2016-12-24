@@ -1,7 +1,6 @@
 (function () {
   class MessageHandler {
 
-
     setGame(g){
       this.game = g;
     }
@@ -13,7 +12,7 @@
             //alert("confirm request");
           case "opponentFound":
             this.game.room = json.data.room;
-            this.game.turn = json.data.turn;
+            this.game.setTurn(json.data.turn);
             break;
           case "fieldState":
             var data = JSON.parse(json.data);
@@ -21,7 +20,9 @@
             this.game.setBodies(data);
             break;
           case "event":
-            this.game.turn = json.data;
+            this.game.setTurn(json.data.turn);
+          case "trouble":
+            this.game.reset();
         }
     }
   }

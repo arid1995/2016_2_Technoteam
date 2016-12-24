@@ -1,4 +1,4 @@
-module.exports = {
+/*module.exports = {
     "extends": "airbnb",
     "plugins": [
         "react",
@@ -29,4 +29,4 @@ module.exports = {
         "no-shadow": 0,
         "prefer-arrow-callback": 0
     }
-}
+}*/
